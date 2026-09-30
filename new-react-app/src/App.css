@@ -18,50 +18,43 @@ body {
 
 /* 主容器 */
 .container {
-  max-width: 1200px;
+  width: min(1360px, 100%);
   margin: 0 auto;
-  padding: 2rem;
+  padding: 1.5rem 1.75rem 2rem;
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: stretch;
 }
 
 /* 主内容区域 */
 .main-content {
   width: 100%;
-  max-width: 1200px;
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 2rem;
+  grid-template-columns: minmax(0, 1.45fr) minmax(280px, 0.9fr);
+  gap: 1.5rem;
+  align-items: start;
+  margin-bottom: 1.5rem;
 }
 
 /* 标题区域 */
 .header {
-  text-align: center;
-  margin-bottom: 2rem;
-  padding-bottom: 1rem;
+  text-align: left;
+  margin-bottom: 1.25rem;
+  padding-bottom: 0.75rem;
   border-bottom: 1px solid #e5e7eb;
 }
 
 .title {
-  font-size: 2rem;
+  font-size: 1.75rem;
   font-weight: 700;
   color: #1f2937;
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.35rem;
+  letter-spacing: -0.02em;
 }
 
 .subtitle {
-  font-size: 1rem;
+  font-size: 0.95rem;
   color: #6b7280;
-}
-
-/* 主内容区域 */
-.main-content {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 2rem;
-  margin-bottom: 2rem;
 }
 
 /* 输入区域 */
@@ -69,9 +62,10 @@ body {
   background-color: white;
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
+  padding: 1.25rem 1.35rem;
   border: 1px solid #f3f4f6;
   width: 100%;
+  min-width: 0;
 }
 
 .section-header {
@@ -112,23 +106,23 @@ body {
 }
 
 .person-row {
-  margin-bottom: 1.5rem;
-  padding: 1rem;
+  margin-bottom: 0.75rem;
+  padding: 0.75rem 0.85rem;
   background-color: #f9fafb;
   border-radius: 0.5rem;
   border: 1px solid #e5e7eb;
-  transition: all 0.3s ease;
+  transition: box-shadow 0.2s ease;
 }
 
 .person-row:hover {
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .person-header {
   display: flex;
   align-items: center;
-  gap: 0.75rem;
-  margin-bottom: 1rem;
+  gap: 0.5rem;
+  margin-bottom: 0.5rem;
 }
 
 .name-input {
@@ -191,17 +185,16 @@ button:active {
 
 /* 费用容器 */
 .expenses-container {
-  margin-top: 1rem;
-  space-y: 0.75rem;
+  margin-top: 0.35rem;
 }
 
 .expense-item {
-  padding: 1rem;
+  padding: 0.75rem;
   background-color: white;
   border-radius: 0.375rem;
   border: 1px solid #e5e7eb;
-  margin-bottom: 0.75rem;
-  transition: all 0.3s ease;
+  margin-bottom: 0.5rem;
+  transition: box-shadow 0.2s ease;
 }
 
 .expense-item:hover {
@@ -291,10 +284,10 @@ button:active {
 
 /* 无费用状态 */
 .no-expenses {
-  text-align: center;
-  padding: 1rem;
+  text-align: left;
+  padding: 0.4rem 0.55rem;
   color: #6b7280;
-  font-size: 0.875rem;
+  font-size: 0.8125rem;
   background-color: #f3f4f6;
   border-radius: 0.375rem;
 }
@@ -331,9 +324,10 @@ button:active {
   background-color: white;
   border-radius: 0.75rem;
   box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
+  padding: 1.25rem 1.35rem;
   border: 1px solid #f3f4f6;
   width: 100%;
+  min-width: 0;
 }
 
 /* 汇率设置 */
@@ -494,9 +488,8 @@ button:active {
   text-align: center;
   padding-top: 1rem;
   border-top: 1px solid #e5e7eb;
-  margin-top: 2rem;
+  margin-top: 1rem;
   width: 100%;
-  max-width: 1200px;
 }
 
 .footer-text {

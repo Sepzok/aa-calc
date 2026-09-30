@@ -715,7 +715,7 @@ function App() {
 
       {/* 页脚 */}
       <footer className="footer">
-        <p className="footer-text">© 2023 AA分账计算器 - 简单、公平地分摊费用</p>
+        <p className="footer-text">© AA分账计算器 · Sepzok</p>
       </footer>
 
       {/* 帮助弹窗 */}

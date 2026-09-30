@@ -1281,3 +1281,43 @@ html {
   color: #0f172a;
   font-weight: 600;
 }
+
+/* Desktop workbench */
+@media (min-width: 1024px) {
+  .input-section {
+    min-width: 0;
+  }
+
+  .output-section {
+    position: sticky;
+    top: 1rem;
+    align-self: start;
+    max-height: calc(100vh - 2rem);
+    overflow: auto;
+  }
+
+  .add-expense-btn,
+  .delete-person-btn {
+    white-space: nowrap;
+  }
+
+  .name-input {
+    min-width: 0;
+  }
+
+  .action-buttons {
+    justify-content: flex-start;
+  }
+
+  .add-person-btn,
+  .load-test-data-btn {
+    flex: 0 1 auto;
+    min-width: 140px;
+  }
+}
+
+@media (max-width: 1023px) and (min-width: 769px) {
+  .main-content {
+    grid-template-columns: 1fr 1fr;
+  }
+}

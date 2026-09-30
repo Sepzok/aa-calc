@@ -1,0 +1,1290 @@
+/* 全局样式重置 */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background-color: #f9fafb;
+  background-image: 
+    radial-gradient(#e5e7eb 1px, transparent 1px),
+    radial-gradient(#e5e7eb 1px, transparent 1px);
+  background-size: 50px 50px;
+  background-position: 0 0, 25px 25px;
+  color: #1f2937;
+}
+
+/* 主容器 */
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 2rem;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* 主内容区域 */
+.main-content {
+  width: 100%;
+  max-width: 1200px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* 标题区域 */
+.header {
+  text-align: center;
+  margin-bottom: 2rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1f2937;
+  margin-bottom: 0.5rem;
+}
+
+.subtitle {
+  font-size: 1rem;
+  color: #6b7280;
+}
+
+/* 主内容区域 */
+.main-content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+/* 输入区域 */
+.input-section {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  border: 1px solid #f3f4f6;
+  width: 100%;
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+}
+
+.section-title {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.help-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  background-color: #e5e7eb;
+  color: #6b7280;
+  border-radius: 50%;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.help-icon:hover {
+  background-color: #d1d5db;
+  color: #374151;
+}
+
+/* 人员容器 */
+.people-container {
+  space-y: 1rem;
+}
+
+.person-row {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  transition: all 0.3s ease;
+}
+
+.person-row:hover {
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+.person-header {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  margin-bottom: 1rem;
+}
+
+.name-input {
+  flex: 1;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.name-input:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-opacity: 0.5;
+  border-color: #3b82f6;
+}
+
+/* 按钮样式 */
+button {
+  padding: 0.5rem 1rem;
+  border: none;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+button:active {
+  transform: translateY(0);
+}
+
+.add-expense-btn {
+  background-color: #10b981;
+  color: white;
+}
+
+.add-expense-btn:hover {
+  background-color: #059669;
+}
+
+.delete-person-btn {
+  background-color: #ef4444;
+  color: white;
+}
+
+.delete-person-btn:hover {
+  background-color: #dc2626;
+}
+
+/* 费用容器 */
+.expenses-container {
+  margin-top: 1rem;
+  space-y: 0.75rem;
+}
+
+.expense-item {
+  padding: 1rem;
+  background-color: white;
+  border-radius: 0.375rem;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.expense-item:hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.expense-amount {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s;
+}
+
+.expense-amount:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-opacity: 0.5;
+  border-color: #3b82f6;
+}
+
+/* 参与人选择 */
+.participants-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.participant-checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+.participant-name {
+  font-size: 0.875rem;
+}
+
+/* 费用备注 */
+.expense-note {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 0.875rem;
+  margin-bottom: 0.75rem;
+  transition: all 0.2s;
+}
+
+.expense-note:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-opacity: 0.5;
+  border-color: #3b82f6;
+}
+
+/* 费用操作 */
+.expense-actions {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.split-amount {
+  font-size: 0.875rem;
+  color: #6b7280;
+  font-weight: 500;
+}
+
+.delete-expense-btn {
+  background-color: #ef4444;
+  color: white;
+  font-size: 0.75rem;
+  padding: 0.25rem 0.5rem;
+}
+
+.delete-expense-btn:hover {
+  background-color: #dc2626;
+}
+
+/* 无费用状态 */
+.no-expenses {
+  text-align: center;
+  padding: 1rem;
+  color: #6b7280;
+  font-size: 0.875rem;
+  background-color: #f3f4f6;
+  border-radius: 0.375rem;
+}
+
+/* 操作按钮 */
+.action-buttons {
+  display: flex;
+  gap: 1rem;
+  margin-top: 1.5rem;
+}
+
+.add-person-btn {
+  flex: 1;
+  background-color: #10b981;
+  color: white;
+}
+
+.add-person-btn:hover {
+  background-color: #059669;
+}
+
+.load-test-data-btn {
+  flex: 1;
+  background-color: #8b5cf6;
+  color: white;
+}
+
+.load-test-data-btn:hover {
+  background-color: #7c3aed;
+}
+
+/* 输出区域 */
+.output-section {
+  background-color: white;
+  border-radius: 0.75rem;
+  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  padding: 1.5rem;
+  border: 1px solid #f3f4f6;
+  width: 100%;
+}
+
+/* 汇率设置 */
+.exchange-rate-container {
+  margin-bottom: 1.5rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.exchange-rate-label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #374151;
+  margin-bottom: 0.5rem;
+}
+
+.exchange-rate-input {
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  font-size: 1rem;
+  transition: all 0.2s;
+}
+
+.exchange-rate-input:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-opacity: 0.5;
+  border-color: #3b82f6;
+}
+
+/* 结算结果 */
+.settlement-results {
+  space-y: 1rem;
+}
+
+/* 空状态 */
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: #6b7280;
+}
+
+.empty-state-text {
+  font-size: 1rem;
+}
+
+/* 平衡状态 */
+.balanced-state {
+  text-align: center;
+  padding: 2rem;
+  color: #10b981;
+}
+
+.balanced-state-text {
+  font-size: 1.125rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.balanced-state-subtext {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* 转账记录 */
+.transfer-row {
+  padding: 1rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+  margin-bottom: 0.75rem;
+  transition: all 0.3s ease;
+}
+
+.transfer-row:hover {
+  box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.05);
+}
+
+.transfer-info {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  justify-content: space-between;
+}
+
+.transfer-from {
+  font-weight: 500;
+  color: #ef4444;
+}
+
+.transfer-arrow {
+  font-size: 0.75rem;
+  color: #6b7280;
+}
+
+.transfer-to {
+  font-weight: 500;
+  color: #10b981;
+}
+
+.transfer-amount {
+  font-size: 1.125rem;
+  font-weight: 600;
+  color: #1f2937;
+  background-color: #f3f4f6;
+  padding: 0.25rem 0.75rem;
+  border-radius: 1rem;
+  white-space: nowrap;
+}
+
+.transfer-formula {
+  display: none;
+}
+
+/* 净收入人员 */
+.net-income-section {
+  margin-top: 1.5rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.section-subtitle {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 1rem;
+}
+
+.net-income-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem;
+  background-color: #f0fdf4;
+  border-radius: 0.375rem;
+  border: 1px solid #dcfce7;
+  margin-bottom: 0.5rem;
+}
+
+.net-income-name {
+  font-weight: 500;
+  color: #1f2937;
+}
+
+.net-income-amount {
+  font-weight: 600;
+  color: #10b981;
+}
+
+/* 页脚 */
+.footer {
+  text-align: center;
+  padding-top: 1rem;
+  border-top: 1px solid #e5e7eb;
+  margin-top: 2rem;
+  width: 100%;
+  max-width: 1200px;
+}
+
+.footer-text {
+  font-size: 0.875rem;
+  color: #6b7280;
+}
+
+/* 帮助弹窗 */
+.help-modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.help-modal-content {
+  background-color: white;
+  border-radius: 0.75rem;
+  padding: 1.5rem;
+  max-width: 500px;
+  width: 90%;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+.help-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1.5rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.help-modal-title {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1f2937;
+}
+
+.help-modal-close {
+  background: none;
+  border: none;
+  font-size: 1.5rem;
+  color: #6b7280;
+  cursor: pointer;
+  padding: 0;
+  width: 24px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 0.25rem;
+  transition: all 0.2s;
+}
+
+.help-modal-close:hover {
+  background-color: #f3f4f6;
+  color: #374151;
+}
+
+/* 帮助内容 */
+.help-content {
+  space-y: 1.5rem;
+}
+
+.help-section {
+  margin-bottom: 1.5rem;
+}
+
+.help-section-title {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #1f2937;
+  margin-bottom: 0.75rem;
+}
+
+.help-section-text {
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin-bottom: 0.75rem;
+}
+
+.help-list {
+  list-style-type: disc;
+  margin-left: 1.5rem;
+  margin-bottom: 0.75rem;
+}
+
+.help-list-item {
+  font-size: 0.875rem;
+  color: #4b5563;
+  line-height: 1.5;
+  margin-bottom: 0.25rem;
+}
+
+/* 响应式设计 */
+@media (max-width: 768px) {
+  .main-content {
+    grid-template-columns: 1fr;
+    width: 100%;
+  }
+  
+  .container {
+    padding: 1rem;
+    align-items: center;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+  }
+  
+  .subtitle {
+    font-size: 0.875rem;
+  }
+  
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .person-header {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .name-input {
+    width: 100%;
+    margin-bottom: 0.5rem;
+  }
+  
+  .participants-container {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  
+  .participant-checkbox {
+    width: 100%;
+    padding: 0.5rem;
+    background-color: #f9fafb;
+    border-radius: 0.375rem;
+    border: 1px solid #e5e7eb;
+  }
+  
+  /* 功能开关优化 */
+  .function-switches {
+    flex-direction: column;
+    gap: 10px;
+    padding: 10px;
+  }
+  
+  .switch-label {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 10px;
+  }
+  
+  .switch-label .exchange-rate-input {
+    width: 100px;
+  }
+  
+  /* 表格优化 */
+  .detail-table-container {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+  
+  .detail-table {
+    min-width: 400px;
+  }
+  
+  /* 转账记录优化 */
+  .transfer-info {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.5rem;
+  }
+  
+  .transfer-amount {
+    align-self: flex-end;
+  }
+  
+  /* 按钮优化 */
+  button {
+    padding: 0.75rem 1rem;
+    font-size: 1rem;
+  }
+  
+  /* 输入框优化 */
+  input {
+    padding: 0.75rem;
+    font-size: 1rem;
+  }
+  
+  /* 费用项优化 */
+  .expense-item {
+    padding: 1rem;
+  }
+  
+  /* 功能说明优化 */
+  .feature-explanation {
+    padding: 15px;
+  }
+  
+  /* 触摸反馈 */
+  button {
+    -webkit-tap-highlight-color: transparent;
+    min-height: 44px;
+  }
+  
+  /* 优化触摸目标 */
+  input[type="checkbox"] {
+    width: 18px;
+    height: 18px;
+  }
+  
+  /* 帮助图标优化 */
+  .help-icon {
+    width: 32px;
+    height: 32px;
+    font-size: 16px;
+  }
+  
+  /* 模态框优化 */
+  .help-modal-content {
+    width: 95%;
+    max-height: 90vh;
+  }
+  
+  /* 响应式间距调整 */
+  .header {
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.75rem;
+  }
+  
+  .main-content {
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+  
+  /* 费用操作优化 */
+  .expense-actions {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 0.5rem;
+  }
+  
+  .split-amount {
+    align-self: flex-start;
+  }
+  
+  .delete-expense-btn {
+    align-self: flex-end;
+  }
+  
+  /* 减少间距 */
+  .input-section,
+  .output-section {
+    padding: 1rem;
+    width: 100%;
+  }
+  
+  .person-row {
+    margin-bottom: 1rem;
+    padding: 0.75rem;
+  }
+  
+  .expense-item {
+    margin-bottom: 0.5rem;
+  }
+  
+  .transfer-row {
+    margin-bottom: 0.5rem;
+  }
+  
+  /* 字体大小调整 */
+  .section-title {
+    font-size: 1rem;
+  }
+  
+  .section-subtitle {
+    font-size: 0.875rem;
+  }
+  
+  .switch-text {
+    font-size: 0.875rem;
+  }
+  
+  .detail-table th,
+  .detail-table td {
+    font-size: 0.875rem;
+    padding: 0.75rem;
+  }
+  
+  .explanation-content p {
+    font-size: 0.875rem;
+  }
+  
+  /* 适应更小屏幕 */
+  @media (max-width: 375px) {
+    .container {
+      padding: 0.75rem;
+      align-items: center;
+    }
+    
+    .title {
+      font-size: 1.25rem;
+    }
+    
+    .function-switches {
+      padding: 8px;
+    }
+    
+    .switch-label {
+      padding: 8px;
+    }
+    
+    .input-section,
+    .output-section {
+      padding: 0.75rem;
+      width: 100%;
+    }
+  }
+}
+
+/* 按钮文本 */
+.button-text {
+  font-size: 0.875rem;
+  font-weight: 500;
+}
+
+/* 输入框焦点效果 */
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  ring: 2px;
+  ring-color: #3b82f6;
+  ring-opacity: 0.5;
+  border-color: #3b82f6;
+  transition: all 0.2s;
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.help-modal-content {
+  animation: fadeIn 0.2s ease-out;
+}
+
+/* 平滑滚动 */
+html {
+  scroll-behavior: smooth;
+}
+
+/* 计算详情样式 */
+.calculation-section {
+  border-left: 3px solid #3b82f6;
+  margin-bottom: 0.5rem;
+  padding-left: 1rem;
+}
+
+.calculation-section h5 {
+  margin-bottom: 0.5rem;
+  font-weight: 600;
+}
+
+.calculation-section .text-xs {
+  margin-bottom: 0.25rem;
+  line-height: 1.4;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+}
+
+.calculation-section.bg-blue-50 {
+  border-left-color: #3b82f6;
+  background-color: #eff6ff;
+  padding: 0.75rem;
+  border-radius: 0.375rem;
+}
+
+/* 详情切换按钮样式 */
+.toggle-details {
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  padding: 0.25rem 0.5rem;
+  font-size: 0.75rem;
+  color: #374151;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin-bottom: 0.75rem;
+}
+
+.toggle-details:hover {
+  background-color: #e5e7eb;
+  border-color: #9ca3af;
+}
+
+/* 详细计算过程容器 */
+.calculation-details {
+  margin-top: 0.75rem;
+  padding: 0.75rem;
+  background-color: #f9fafb;
+  border-radius: 0.5rem;
+  border: 1px solid #e5e7eb;
+}
+
+.details-section {
+  margin-bottom: 1rem;
+}
+
+.details-section:last-child {
+  margin-bottom: 0;
+}
+
+.details-section h4 {
+  margin-bottom: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 600;
+  color: #374151;
+}
+
+.details-list {
+  background-color: white;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+}
+
+.detail-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.detail-item:last-child {
+  margin-bottom: 0;
+}
+
+.detail-desc {
+  color: #6b7280;
+  flex: 1;
+}
+
+.detail-amount {
+  font-weight: 500;
+  margin-left: 0.5rem;
+}
+
+/* 汇总计算样式 */
+.summary {
+  background-color: #f3f4f6 !important;
+  border: 1px solid #d1d5db;
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 0.375rem;
+  font-size: 0.75rem;
+}
+
+.summary-item:last-child {
+  margin-bottom: 0;
+}
+
+.original-balance, .final-balance {
+  font-weight: 600;
+  padding-top: 0.25rem;
+  border-top: 1px dashed #d1d5db;
+}
+
+.final-balance {
+  color: #059669;
+  font-size: 0.875rem;
+}
+
+/* 工具提示样式 */
+.tooltip {
+  position: relative;
+  display: inline-block;
+}
+
+.tooltip .tooltiptext {
+  visibility: hidden;
+  width: 200px;
+  background-color: #1f2937;
+  color: white;
+  text-align: center;
+  border-radius: 0.375rem;
+  padding: 0.5rem;
+  position: absolute;
+  z-index: 1;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  opacity: 0;
+  transition: opacity 0.3s;
+  font-size: 0.75rem;
+  line-height: 1.4;
+}
+
+.tooltip .tooltiptext::after {
+  content: "";
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  margin-left: -5px;
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1f2937 transparent transparent transparent;
+}
+
+.tooltip:hover .tooltiptext {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* 输入错误状态 */
+.input-error {
+  border-color: #ef4444;
+  ring: 1px;
+  ring-color: #ef4444;
+}
+
+/* 加载动画 */
+.loading {
+  position: relative;
+  overflow: hidden;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.4),
+    transparent
+  );
+  animation: loading 1.5s infinite;
+}
+
+@keyframes loading {
+  100% {
+    left: 100%;
+  }
+}
+
+/* 支付矩阵表格 */
+.payment-matrix {
+  margin-top: 1rem;
+  overflow-x: auto;
+}
+
+.matrix-header {
+  display: flex;
+  background-color: #f3f4f6;
+  border-radius: 0.375rem 0.375rem 0 0;
+  padding: 0.75rem;
+  font-weight: 600;
+}
+
+.matrix-header-cell {
+  flex: 1;
+  text-align: center;
+}
+
+.matrix-row {
+  display: flex;
+  border-bottom: 1px solid #e5e7eb;
+}
+
+.matrix-row-header {
+  flex: 1;
+  padding: 0.75rem;
+  font-weight: 500;
+  background-color: #f9fafb;
+}
+
+.matrix-cell {
+  flex: 1;
+  padding: 0.75rem;
+  text-align: center;
+  border-left: 1px solid #e5e7eb;
+}
+
+.matrix-cell-positive {
+  color: #10b981;
+  font-weight: 500;
+}
+
+/* 开关样式 */
+.switch {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.switch-label {
+  font-size: 0.875rem;
+  color: #374151;
+}
+
+/* 开关容器 */
+.switches-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+/* 功能开关 */
+.function-switches {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 20px;
+  margin-bottom: 20px;
+  padding: 15px;
+  background-color: #f1f5f9;
+  border-radius: 8px;
+}
+
+.switch-label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  position: relative;
+  padding: 8px 12px;
+  border-radius: 6px;
+  transition: background-color 0.2s;
+}
+
+.switch-label input[type="checkbox"] {
+  margin: 0;
+}
+
+.switch-label .exchange-rate-input {
+  width: 80px;
+  padding: 4px 8px;
+  font-size: 12px;
+  margin-left: 4px;
+}
+
+.switch-label:hover {
+  background-color: #e2e8f0;
+}
+
+.switch-text {
+  font-size: 14px;
+  font-weight: 500;
+  color: #334155;
+}
+
+.switch-tooltip {
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  background-color: #1e293b;
+  color: white;
+  padding: 8px 12px;
+  border-radius: 6px;
+  font-size: 12px;
+  white-space: nowrap;
+  opacity: 0;
+  visibility: hidden;
+  transition: opacity 0.2s, visibility 0.2s;
+  z-index: 100;
+  margin-bottom: 8px;
+}
+
+.switch-label:hover .switch-tooltip {
+  opacity: 1;
+  visibility: visible;
+}
+
+.switch-tooltip::after {
+  content: '';
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  border-width: 5px;
+  border-style: solid;
+  border-color: #1e293b transparent transparent transparent;
+}
+
+/* 支付明细表格 */
+.payment-detail {
+  margin-top: 30px;
+}
+
+.detail-table-container {
+  overflow-x: auto;
+  margin-top: 10px;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.detail-table {
+  width: 100%;
+  border-collapse: collapse;
+  background-color: white;
+}
+
+.detail-table th {
+  background-color: #0f172a;
+  color: white;
+  padding: 12px 16px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 14px;
+  border-bottom: 2px solid #334155;
+}
+
+.detail-table td {
+  padding: 12px 16px;
+  border-bottom: 1px solid #e2e8f0;
+  font-size: 14px;
+}
+
+.table-row:hover {
+  background-color: #f8fafc;
+}
+
+.amount-cell {
+  font-weight: 600;
+  color: #dc2626;
+}
+
+.status-cell {
+  text-align: center;
+}
+
+.status-pending {
+  display: inline-block;
+  padding: 4px 12px;
+  background-color: #fef3c7;
+  color: #92400e;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: 500;
+}
+
+/* 功能说明 */
+.feature-explanation {
+  margin-top: 30px;
+  padding: 20px;
+  background-color: #f0f9ff;
+  border-radius: 8px;
+  border-left: 4px solid #3b82f6;
+}
+
+.explanation-content {
+  margin-top: 10px;
+  line-height: 1.6;
+}
+
+.explanation-content p {
+  margin-bottom: 10px;
+  color: #1e293b;
+}
+
+.explanation-content strong {
+  color: #0f172a;
+  font-weight: 600;
+}

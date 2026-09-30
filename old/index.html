@@ -1,0 +1,611 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AA分账计算器</title>
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Font Awesome -->
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <!-- 配置Tailwind颜色和字体 -->
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#10B981',
+                        neutral: '#F3F4F6',
+                        accent: '#6366F1',
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    <!-- 自定义工具类 -->
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .content-auto {
+                content-visibility: auto;
+            }
+            .transition-height {
+                transition: max-height 0.3s ease;
+            }
+            .scrollbar-hide::-webkit-scrollbar {
+                display: none;
+            }
+            .scrollbar-hide {
+                -ms-overflow-style: none;
+                scrollbar-width: none;
+            }
+        }
+    </style>
+    <style>
+        /* 全局样式 */
+        body {
+            font-family: 'Inter', system-ui, sans-serif;
+            background-color: #f9fafb;
+            background-image: 
+                radial-gradient(#e5e7eb 1px, transparent 1px),
+                radial-gradient(#e5e7eb 1px, transparent 1px);
+            background-size: 50px 50px;
+            background-position: 0 0, 25px 25px;
+        }
+        
+        /* 输入框焦点效果 */
+        input:focus,
+        textarea:focus,
+        select:focus {
+            @apply ring-2 ring-primary ring-opacity-50 outline-none;
+            transition: all 0.2s ease;
+        }
+        
+        /* 按钮悬停效果 */
+        button {
+            @apply transition-all duration-200 ease-in-out;
+        }
+        button:hover {
+            @apply transform -translate-y-0.5;
+        }
+        button:active {
+            @apply transform translate-y-0;
+        }
+        
+        /* 人员行和费用项动画 */
+        .person-row,
+        .expense-item {
+            @apply transition-all duration-300 ease-in-out;
+        }
+        .person-row:hover,
+        .expense-item:hover {
+            @apply shadow-md;
+        }
+        
+        /* 复选框样式 */
+        .participant-checkbox:checked {
+            @apply bg-primary border-primary;
+        }
+        .participant-checkbox:checked:after {
+            content: '✓';
+            position: absolute;
+            color: white;
+            font-size: 10px;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+        
+        /* 下拉动画 */
+        .participants-dropdown {
+            animation: fadeIn 0.2s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-10px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* 结算结果行动画 */
+        .result-row {
+            @apply transition-all duration-300 ease-in-out;
+        }
+        .result-row:hover {
+            @apply shadow-md bg-gray-100;
+        }
+        
+        /* 平滑滚动 */
+        html {
+            scroll-behavior: smooth;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 640px) {
+            .container {
+                @apply px-3;
+            }
+            
+            .person-row,
+            .result-row {
+                @apply p-3;
+            }
+            
+            h1 {
+                @apply text-2xl;
+            }
+        }
+        
+        /* 横屏布局调整 */
+        @media (min-width: 1024px) {
+            main {
+                max-height: calc(100vh - 200px);
+            }
+            
+            #input-section,
+            #output-section {
+                height: 100%;
+                display: flex;
+                flex-direction: column;
+            }
+            
+            #people-container,
+            #settlement-results {
+                flex: 1;
+                overflow-y: auto;
+                padding-right: 5px;
+            }
+            
+            #people-container::-webkit-scrollbar,
+            #settlement-results::-webkit-scrollbar {
+                width: 5px;
+            }
+            
+            #people-container::-webkit-scrollbar-track,
+            #settlement-results::-webkit-scrollbar-track {
+                background: #f1f1f1;
+                border-radius: 10px;
+            }
+            
+            #people-container::-webkit-scrollbar-thumb,
+            #settlement-results::-webkit-scrollbar-thumb {
+                background: #d1d5db;
+                border-radius: 10px;
+            }
+            
+            #people-container::-webkit-scrollbar-thumb:hover,
+            #settlement-results::-webkit-scrollbar-thumb:hover {
+                background: #9ca3af;
+            }
+        }
+        
+        /* 输入错误状态 */
+        .input-error {
+            @apply border-red-500 ring-1 ring-red-500;
+        }
+        
+        /* 加载动画 */
+        .loading {
+            position: relative;
+            overflow: hidden;
+        }
+        .loading::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(
+                90deg,
+                transparent,
+                rgba(255, 255, 255, 0.4),
+                transparent
+            );
+            animation: loading 1.5s infinite;
+        }
+        
+        @keyframes loading {
+            100% {
+                left: 100%;
+            }
+        }
+        
+        /* 计算详情样式 */
+        .calculation-section {
+            border-left: 3px solid #3B82F6;
+            margin-bottom: 8px;
+        }
+        
+        .calculation-section h5 {
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+        
+        .calculation-section .text-xs {
+            margin-bottom: 4px;
+            line-height: 1.4;
+            word-wrap: break-word;
+            overflow-wrap: break-word;
+        }
+        
+        .calculation-section.bg-blue-50 {
+            border-left-color: #3B82F6;
+        }
+        
+        .calculation-section.bg-orange-50 {
+            border-left-color: #F97316;
+        }
+        
+        .calculation-section.bg-gray-100 {
+            border-left-color: #6B7280;
+        }
+        
+        /* 详情切换按钮样式 */
+        .toggle-details {
+            background-color: #F3F4F6;
+            border: 1px solid #D1D5DB;
+            border-radius: 4px;
+            padding: 4px 8px;
+            font-size: 12px;
+            color: #374151;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        
+        .toggle-details:hover {
+            background-color: #E5E7EB;
+            border-color: #9CA3AF;
+        }
+        
+        /* 详细计算过程容器 */
+        .calculation-details {
+            margin-top: 10px;
+            padding: 10px;
+            background-color: #F9FAFB;
+            border-radius: 6px;
+            border: 1px solid #E5E7EB;
+        }
+        
+        .details-section {
+            margin-bottom: 15px;
+        }
+        
+        .details-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .details-section h4 {
+            margin-bottom: 8px;
+            font-size: 14px;
+            font-weight: 600;
+            color: #374151;
+        }
+        
+        .details-list {
+            background-color: #FFFFFF;
+            border-radius: 4px;
+            padding: 8px;
+        }
+        
+        .detail-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 4px;
+            font-size: 12px;
+        }
+        
+        .detail-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .detail-desc {
+            color: #6B7280;
+            flex: 1;
+        }
+        
+        .detail-amount {
+            font-weight: 500;
+            margin-left: 10px;
+        }
+        
+        /* 汇总计算样式 */
+        .summary {
+            background-color: #F3F4F6 !important;
+            border: 1px solid #D1D5DB;
+        }
+        
+        .summary-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 6px;
+            font-size: 12px;
+        }
+        
+        .summary-item:last-child {
+            margin-bottom: 0;
+        }
+        
+        .original-balance, .final-balance {
+            font-weight: 600;
+            padding-top: 4px;
+            border-top: 1px dashed #D1D5DB;
+        }
+        
+        .final-balance {
+            color: #059669;
+            font-size: 13px;
+        }
+        
+        /* 帮助图标样式 */
+        .help-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 16px;
+            height: 16px;
+            background-color: #E5E7EB;
+            color: #6B7280;
+            border-radius: 50%;
+            font-size: 10px;
+            cursor: pointer;
+            margin-left: 6px;
+            transition: all 0.2s;
+        }
+        
+        .help-icon:hover {
+            background-color: #D1D5DB;
+            color: #374151;
+        }
+        
+        /* 帮助弹窗样式 */
+        .help-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+        
+        .help-modal-content {
+            background-color: white;
+            border-radius: 8px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            max-height: 80vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
+        }
+        
+        .help-modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+        
+        .help-modal-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1F2937;
+        }
+        
+        .help-modal-close {
+            background: none;
+            border: none;
+            font-size: 20px;
+            color: #6B7280;
+            cursor: pointer;
+            padding: 0;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 4px;
+            transition: all 0.2s;
+        }
+        
+        .help-modal-close:hover {
+            background-color: #F3F4F6;
+            color: #374151;
+        }
+        
+        .help-section {
+            margin-bottom: 15px;
+        }
+        
+        .help-section:last-child {
+            margin-bottom: 0;
+        }
+        
+        .help-section h3 {
+            font-size: 16px;
+            font-weight: 600;
+            color: #1F2937;
+            margin-bottom: 8px;
+        }
+        
+        .help-section p {
+            font-size: 14px;
+            color: #4B5563;
+            line-height: 1.5;
+            margin-bottom: 8px;
+        }
+        
+        .help-section ul {
+            margin-left: 20px;
+            margin-bottom: 8px;
+        }
+        
+        .help-section li {
+            font-size: 14px;
+            color: #4B5563;
+            margin-bottom: 4px;
+        }
+        
+        .help-key {
+            display: inline-block;
+            background-color: #F3F4F6;
+            border: 1px solid #D1D5DB;
+            border-radius: 4px;
+            padding: 2px 6px;
+            font-family: monospace;
+            font-size: 12px;
+            color: #374151;
+        }
+        
+        /* 工具提示样式 */
+        .tooltip {
+            position: relative;
+            display: inline-block;
+        }
+        
+        .tooltip .tooltiptext {
+            visibility: hidden;
+            width: 200px;
+            background-color: #1F2937;
+            color: #fff;
+            text-align: center;
+            border-radius: 6px;
+            padding: 8px;
+            position: absolute;
+            z-index: 1;
+            bottom: 125%;
+            left: 50%;
+            transform: translateX(-50%);
+            opacity: 0;
+            transition: opacity 0.3s;
+            font-size: 12px;
+            line-height: 1.4;
+        }
+        
+        .tooltip .tooltiptext::after {
+            content: "";
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            margin-left: -5px;
+            border-width: 5px;
+            border-style: solid;
+            border-color: #1F2937 transparent transparent transparent;
+        }
+        
+        .tooltip:hover .tooltiptext {
+            visibility: visible;
+            opacity: 1;
+        }
+    </style>
+</head>
+<body class="bg-gray-50 min-h-screen">
+    <div class="container mx-auto px-4 py-8 max-w-5xl">
+        <!-- 标题区域 -->
+        <header class="mb-4 text-center">
+            <h1 class="text-xl font-bold text-gray-800 mb-1">AA分账计算器</h1>
+            <p class="text-gray-500 text-sm">简单快捷地进行多人费用分摊计算</p>
+        </header>
+
+        <main class="grid grid-cols-1 lg:grid-cols-2 gap-4">
+            <!-- 输入区域 -->
+            <section id="input-section" class="bg-white rounded-xl shadow-md p-4 border border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-pencil-square-o mr-2 text-primary"></i>费用录入
+                    <span id="expense-help-icon" class="help-icon">?</span>
+                </h2>
+                
+                <div id="people-container" class="space-y-3">
+                    <!-- 人员行将通过JavaScript动态添加 -->
+                </div>
+                
+                <!-- 添加参与人按钮 -->
+                <div class="mt-3 flex gap-2">
+                    <button id="add-person-btn" class="flex-1 flex items-center justify-center py-2 px-3 bg-secondary hover:bg-secondary/90 text-white font-medium rounded-lg transition-all shadow-sm hover:shadow-md text-sm">
+                        <i class="fa fa-plus-circle mr-2"></i>添加参与人
+                    </button>
+                    <button id="load-test-data-btn" class="flex-1 flex items-center justify-center py-2 px-3 bg-purple-500 hover:bg-purple-600 text-white font-medium rounded-lg transition-all shadow-sm hover:shadow-md text-sm">
+                        <i class="fa fa-database mr-2"></i>加载测试数据
+                    </button>
+                    <button id="calculate-btn" class="flex-1 flex items-center justify-center py-2 px-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg transition-all shadow-sm hover:shadow-md text-sm">
+                        <i class="fa fa-calculator mr-2"></i>保存并计算
+                    </button>
+                </div>
+            </section>
+
+            <!-- 输出区域 -->
+            <section id="output-section" class="bg-white rounded-xl shadow-md p-4 border border-gray-100">
+                <h2 class="text-lg font-semibold text-gray-800 mb-3 flex items-center">
+                    <i class="fa fa-calculator mr-2 text-accent"></i>结算结果
+                </h2>
+                
+                <!-- 汇率设置 -->
+                <div class="mb-4 p-3 bg-gray-50 rounded-lg">
+                    <div class="flex items-center gap-4">
+                        <div class="flex-1">
+                            <label for="exchange-rate" class="block text-xs font-medium text-gray-700 mb-1">汇率 (默认 7.12)</label>
+                            <input type="number" id="exchange-rate" min="0" step="0.01" value="7.12" 
+                                class="w-full px-2 py-1 text-sm border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-primary/50">
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- 结算结果 -->
+                <div id="settlement-results" class="space-y-2">
+                    <!-- 结算结果将通过JavaScript动态添加 -->
+                    <p class="text-gray-500 text-center py-2 text-sm">请先添加人员和费用</p>
+                </div>
+            </section>
+        </main>
+
+        <!-- 页脚 -->
+        <footer class="mt-12 text-center text-gray-500 text-sm">
+            <p>© 2026 AA分账计算器 - 简单、公平地分摊费用</p>
+        </footer>
+    </div>
+
+    <!-- 帮助弹窗 -->
+    <div id="help-modal" class="help-modal">
+        <div class="help-modal-content">
+            <div class="help-modal-header">
+                <h2 class="help-modal-title">费用录入快捷键说明</h2>
+                <button id="help-modal-close" class="help-modal-close">&times;</button>
+            </div>
+            
+            <div class="help-section">
+                <h3>键盘快捷键</h3>
+                <p>在费用录入过程中，您可以使用以下快捷键提高效率：</p>
+                <ul>
+                    <li><span class="help-key">Enter</span> - 在姓名输入框中按回车键，快速添加当前人员的费用项</li>
+                    <li><span class="help-key">Tab</span> - 在姓名输入框中按Tab键，切换到下一个参与人的姓名输入框并全选内容</li>
+                </ul>
+            </div>
+            
+            <div class="help-section">
+                <h3>使用技巧</h3>
+                <p>1. 页面加载时会自动聚焦到第一个参与人的姓名输入框</p>
+                <p>2. 使用Tab键可以在不同参与人之间快速切换</p>
+                <p>3. 按回车键可以快速添加费用，无需鼠标点击</p>
+                <p>4. 添加费用后，可以直接在金额输入框中输入费用金额</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript逻辑 -->
+    <script type="module" src="src/js/main.js"></script>
+</body>
+</html>

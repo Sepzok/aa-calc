@@ -18,3 +18,7 @@ npm run dev
 - `old/` — earlier browser prototype
 
 MIT license (see `LICENSE`).
+
+## Demo
+
+https://sepzok.github.io/aa-calc/
